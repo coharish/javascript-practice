@@ -49,8 +49,9 @@ const findMinMeetingRooms = (allSlots) => {
 };
 
 const schedule = [
-  [0, 50],
-  [5, 35],
+  [0, 30],
+  [5, 20],
+  [25, 30],
   [30, 35],
 ];
 // const minMeetings = findMinMeetingRooms(schedule);
@@ -76,5 +77,23 @@ const findMinMeetingRoomsOptimised = (slots) => {
   return rooms;
 };
 
-const minMeetings = findMinMeetingRoomsOptimised(schedule);
+const findMeetingRooms2 = (slots) => {
+  const startTime = slots.sort((a, b) => a[0] - b[0]);
+  const endTime = slots.sort((a, b) => a[1] - b[1]);
+
+  let rooms = 0;
+  let j = 0;
+
+  for (let i = 0; i < slots.length; i++) {
+    if (startTime[i][0] < endTime[j][1]) {
+      rooms++;
+    } else {
+      j++;
+    }
+  }
+
+  return rooms;
+};
+
+const minMeetings = findMeetingRooms2(schedule);
 console.log(minMeetings);
